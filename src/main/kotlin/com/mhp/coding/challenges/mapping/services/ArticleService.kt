@@ -4,6 +4,7 @@ import com.mhp.coding.challenges.mapping.repositories.ArticleRepository
 import com.mhp.coding.challenges.mapping.mappers.ArticleMapper
 import com.mhp.coding.challenges.mapping.models.dto.ArticleDto
 import org.springframework.stereotype.Service
+import kotlin.collections.sortedBy as sortedBy
 
 @Service
 class ArticleService(
@@ -11,9 +12,12 @@ class ArticleService(
 ) {
     fun list(): List<ArticleDto> {
         val articles = ArticleRepository.all()
-        //TODO
-        articles.map { it.blocks.sortedBy { it.sortIndex } }
-        return articles.map { mapper.map(it)}
+
+        val articleDtoList = articles.map { mapper.map(it)}
+        articleDtoList.forEach { it ->
+            it.blocks.sortedBy { it.sortIndex }
+        }
+        return articleDtoList
     }
 
     fun articleForId(id: Long): ArticleDto? {

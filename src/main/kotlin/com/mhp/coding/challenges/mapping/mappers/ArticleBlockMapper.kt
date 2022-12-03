@@ -2,7 +2,6 @@ package com.mhp.coding.challenges.mapping.mappers
 
 import com.mhp.coding.challenges.mapping.models.db.blocks.ArticleBlock
 import com.mhp.coding.challenges.mapping.models.dto.blocks.ArticleBlockDto
-import org.mapstruct.Mapper
 import org.springframework.stereotype.Component
 import java.util.*
 
