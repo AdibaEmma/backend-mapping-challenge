@@ -2,18 +2,23 @@ package com.mhp.coding.challenges.mapping.mappers
 
 import com.mhp.coding.challenges.mapping.models.db.blocks.ArticleBlock
 import com.mhp.coding.challenges.mapping.models.dto.blocks.ArticleBlockDto
-import org.mapstruct.InheritInverseConfiguration
 import org.mapstruct.Mapper
+import org.springframework.stereotype.Component
+import java.util.*
 
-@Mapper
-interface ArticleBlockMapper {
-    @InheritInverseConfiguration
-    fun toEntity(articleBlockDto: ArticleBlockDto): ArticleBlock
+@Component
+class ArticleBlockMapper {
+    fun map(articleBlock: ArticleBlock): ArticleBlockDto {
+        return  object: ArticleBlockDto {
+            override val sortIndex= articleBlock.sortIndex
+        }
+    }
+    fun map(articleBlocks: Set<ArticleBlock>): Collection<ArticleBlockDto> {
+        var articleBlockDtos: Collection<ArticleBlockDto> = emptyList()
 
-    fun toDTO(articleBlock: ArticleBlock): ArticleBlockDto
-
-    @InheritInverseConfiguration
-    fun toEntity(articleBlockDtos: Collection<ArticleBlockDto>?): Collection<ArticleBlock>?
-
-    fun toDTO(articleBlocks: Collection<ArticleBlock>?): Collection<ArticleBlockDto>?
+        for (articleBlock in articleBlocks) {
+            articleBlockDtos += map(articleBlock)
+        }
+        return Collections.emptyList()
+    }
 }

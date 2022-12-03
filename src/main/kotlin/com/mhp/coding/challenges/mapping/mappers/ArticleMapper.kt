@@ -2,20 +2,24 @@ package com.mhp.coding.challenges.mapping.mappers
 
 import com.mhp.coding.challenges.mapping.models.db.Article
 import com.mhp.coding.challenges.mapping.models.dto.ArticleDto
-import org.mapstruct.factory.Mappers
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
 class ArticleMapper{
-val articleBlockMapper = Mappers.getMapper(ArticleBlockMapper::class.java)
+
+@Autowired
+lateinit var articleBlockMapper: ArticleBlockMapper
     fun map(article: Article?): ArticleDto = ArticleDto(
         article?.id!!,
         article.title,
         article.description!!,
         article.author!!,
-        articleBlockMapper.toDTO(article.blocks)!!
+        articleBlockMapper.map(article.blocks)
     )
+
+
 
     // Not part of the challenge / Nicht Teil dieser Challenge.
     fun map(articleDto: ArticleDto?): Article = Article(
