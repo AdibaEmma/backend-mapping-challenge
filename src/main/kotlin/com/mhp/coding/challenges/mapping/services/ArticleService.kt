@@ -12,13 +12,13 @@ class ArticleService(
     fun list(): List<ArticleDto> {
         val articles = ArticleRepository.all()
         //TODO
-        return emptyList()
+        articles.map { it.blocks.sortedBy { it.sortIndex } }
+        return articles.map { mapper.map(it)}
     }
 
-    fun articleForId(id: Long): ArticleDto {
+    fun articleForId(id: Long): ArticleDto? {
         val article = ArticleRepository.findBy(id)
-        //TODO
-        return ArticleDto(0, "", "", "", emptyList())
+        return mapper.map(article)
     }
 
     fun create(articleDto: ArticleDto): ArticleDto {
