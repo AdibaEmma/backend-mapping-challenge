@@ -14,8 +14,8 @@ lateinit var articleBlockMapper: ArticleBlockMapper
     fun map(article: Article?): ArticleDto = ArticleDto(
         article?.id!!,
         article.title,
-        article.description!!,
-        article.author!!,
+        article.description,
+        article.author,
         articleBlockMapper.map(article.blocks)
     )
 

@@ -15,7 +15,7 @@ class ArticleService(
 
         val articleDtoList = articles.map { mapper.map(it)}
         articleDtoList.forEach { it ->
-            it.blocks.sortedBy { it.sortIndex }
+            it.blocks?.sortedBy { it.sortIndex }
         }
         return articleDtoList
     }
