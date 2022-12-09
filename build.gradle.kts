@@ -13,11 +13,17 @@ version = "0.0.1-SNAPSHOT"
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.mapstruct:mapstruct:1.5.3.Final")
+	implementation("org.projectlombok:lombok:1.18.24")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	annotationProcessor("org.projectlombok:lombok:1.18.24")
+	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 }
 
 tasks {
@@ -26,7 +32,9 @@ tasks {
 			jvmTarget = "1.8"
 			apiVersion = "1.4"
 			languageVersion = "1.4"
-			freeCompilerArgs = listOf("-Xjsr305=strict")
+			freeCompilerArgs = listOf(
+				"-Xjsr305=strict"
+				)
 		}
 	}
 	withType<Test> {
