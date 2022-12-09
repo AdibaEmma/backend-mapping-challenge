@@ -13,9 +13,6 @@ import java.util.*
 
 @Component
 class ArticleMapper{
-
-@Autowired
-lateinit var articleBlockMapper: ArticleBlockMapper
     fun map(article: Article?): ArticleDto {
         return ArticleDto(
             id = article?.id,
