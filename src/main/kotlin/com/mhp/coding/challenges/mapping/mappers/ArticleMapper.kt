@@ -7,7 +7,6 @@ import com.mhp.coding.challenges.mapping.models.db.blocks.*
 import com.mhp.coding.challenges.mapping.models.dto.ArticleDto
 import com.mhp.coding.challenges.mapping.models.dto.ImageDto
 import com.mhp.coding.challenges.mapping.models.dto.blocks.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -34,7 +33,7 @@ class ArticleMapper{
                 sortIndex = articleBlock.sortIndex
             )
             is GalleryBlock -> GalleryBlockDto(
-                images = articleBlock.images.map {mapImageToDto(it) }.toList(),
+                images = articleBlock.images.map { mapImageToDto(it!!) },
                 sortIndex = articleBlock.sortIndex
             )
 
@@ -49,10 +48,10 @@ class ArticleMapper{
 
     fun mapImageToDto(image: Image?): ImageDto {
         return ImageDto(
-                id = image?.id,
-                url = image?.url ?: "",
-                imageSize = image?.imageSize ?: ImageSize.SMALL
-            )
+            id = image!!.id,
+            url = image.url,
+            imageSize = image.imageSize
+        )
     }
 
 
